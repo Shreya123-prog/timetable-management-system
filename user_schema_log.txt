@@ -1,0 +1,1 @@
+id | username | email | password | role | full_name | created_at | year_id | division_id | 
