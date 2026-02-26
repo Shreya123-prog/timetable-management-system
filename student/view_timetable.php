@@ -228,25 +228,37 @@ if ($previousSlot) {
 
         <td>
 <?php if ($isLabContinuation): ?>
-    <div style="font-style:italic;color:#94a3b8;">
+    <div style="font-style:italic; color:#94a3b8;">
         LAB continues...
     </div>
 
 <?php elseif (!empty($entries)): ?>
-    <?php foreach ($entries as $e): ?>
-        <?php if (!empty($e['batch'])): ?>
-            <div style="font-size:0.75rem;font-weight:600;">
-                <?php echo $e['batch']; ?>
-            </div>
-        <?php endif; ?>
 
-        <div class="subject"><?php echo $e['subject_name']; ?></div>
-        <div class="faculty"><?php echo $e['faculty_name']; ?></div>
-        <div class="room"><?php echo $e['room_name']; ?></div>
-    <?php endforeach; ?>
+    <?php if (count($entries) > 1): ?>
+        <!-- LAB FIRST SLOT -->
+        <div class="slot-content">
+            <strong>LAB</strong><br>
+            <?php foreach ($entries as $e): ?>
+                <div style="font-size:12px; margin-bottom:4px; border-bottom:1px dashed #e2e8f0;">
+                    <b><?php echo $e['batch']; ?></b> :
+                    <span class="subjet"><?php echo $e['subject_name']; ?></span><br>
+                   <span class="faculty"> <?php echo $e['faculty_name']; ?> </span>|
+                   <span class="room"> <?php echo $e['room_name']; ?> </span>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+    <?php else: ?>
+        <!-- LECTURE -->
+        <div class="slot-content">
+            <div class="subject"><?php echo $entries[0]['subject_name']; ?></div>
+            <div class="faculty"><?php echo $entries[0]['faculty_name']; ?></div>
+            <div class="room"><?php echo $entries[0]['room_name']; ?></div>
+        </div>
+    <?php endif; ?>
 
 <?php else: ?>
-    --
+    <div style="color:#cbd5e1;">--</div>
 <?php endif; ?>
 </td>
 
